@@ -34,6 +34,7 @@ class PDF {
 		$this->prepare($html);
 
 		//Close and output PDF document
+		ob_end_clean();
 		$this->pdf->Output($filename . '.pdf', 'D');
 	}
 
