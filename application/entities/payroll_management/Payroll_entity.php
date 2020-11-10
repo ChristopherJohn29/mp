@@ -189,8 +189,8 @@ class Payroll_entity {
 
 		$computed['total_salary'] += $computed['acp']['total'];
 		
-		$computed['mileage']['total'] = $computed['mileage']['qty'] * 
-			$computed['mileage']['amount'];
+		$computed['mileage']['total'] = (float) $computed['mileage']['qty'] * 
+			(float) $computed['mileage']['amount'];
 
 		$computed['total_salary'] += $computed['mileage']['total'];
 
