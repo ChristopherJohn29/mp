@@ -126,7 +126,6 @@ class Payroll extends \Mobiledrs\core\MY_Controller {
 			$html = $this->load->view('payroll_management/payroll/pdf', $page_data, true);
 			$filename = $this->input->post('providerName') . ' Payroll Period: ';
 			$filename .= $this->input->post('payPeriod');
-			ob_end_clean();
 			$this->pdf->generate($html, $filename);
 		}
 		elseif ($this->input->post('submit_type') == 'email')
