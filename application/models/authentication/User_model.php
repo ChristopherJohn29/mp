@@ -113,4 +113,44 @@ class User_model extends \Mobiledrs\core\MY_Models {
 			return false;
 		}
 	}
+
+	public function fetchHomeVisitRequest($fromDate = NULL, $toDate = NULL){
+
+		
+		$this->db->select('*');
+		$this->db->from('home_visit_request');
+
+		if($fromDate != NULL && $toDate != NULL){
+			$this->db->where('date_of_sent >=', $fromDate);
+			$this->db->where('date_of_sent <=', $toDate);
+		}
+
+		$this->db->order_by('id', 'DESC');
+
+		$result = $this->db->get()->result_array();
+
+		return $result;
+	}
+
+	public function getSuperMd(){
+
+		$this->db->select('*');
+        $this->db->where('provider_supervising_MD', 1);
+		$this->db->where('provider_inactive !=', 1);
+        $this->db->from('provider');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+	}
+
+	public function fetchHomeVisitRequestById($id = ''){
+		$this->db->select('*');
+		$this->db->from('home_visit_request');
+		$this->db->where('id', $id);
+		$this->db->order_by('id', 'ASC');
+
+		$result = $this->db->get()->result_array();
+
+		return $result;
+	}
 }

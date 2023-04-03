@@ -335,5 +335,11 @@
 		</li>
 
 		{% endif %}
+		<li>
+			<a href="{{ site_url('home_visit_request') }}">
+				<i class="fa fa-calendar"></i>
+				<span>Home Visit Request</span>
+			</a>
+		</li>
 	</ul>
 </section>
