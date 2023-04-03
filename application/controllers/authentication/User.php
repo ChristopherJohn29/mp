@@ -7,6 +7,7 @@ class User extends CI_Controller {
 	
 	public function __construct()
 	{
+
 		parent::__construct();
 
 		$this->load->model(array(
@@ -20,11 +21,44 @@ class User extends CI_Controller {
 
 	public function index()
 	{
+		
+		$cookie_name = "computer_cookie";
+        
+        if(!isset($_COOKIE['computer_cookie'])) {
+           redirect('Cookie/generate_cookie');
+        } else {
+
+		
+			$result = $this->user_model->checkCookie($_COOKIE['computer_cookie']);
+
+			if(empty($result)) {
+				redirect('Cookie/generate_cookie');
+			}
+  
+        }
 		$this->twig->view('authentication/user');
 	}
 
 	public function verify()
 	{
+
+		$cookie_name = "computer_cookie";
+        
+        if(!isset($_COOKIE['computer_cookie'])) {
+           redirect('Cookie/generate_cookie');
+        } else {
+
+		
+			$result = $this->user_model->checkCookie($_COOKIE['computer_cookie']);
+
+			if(empty($result)) {
+				redirect('Cookie/generate_cookie');
+			}
+  
+        }
+
+
+
 		$this->load->library('form_validation');
 
 		if ($this->form_validation->run() == FALSE)

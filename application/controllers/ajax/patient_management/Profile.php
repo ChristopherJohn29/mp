@@ -45,6 +45,32 @@ class Profile extends \Mobiledrs\core\MY_AJAX_Controller {
 		echo json_encode($search_data);
 	}
 
+
+	public function searchByHomeHealth($homeHealth = false)
+	{
+		$this->check_permission('search_pt');
+
+		$patients = array();
+
+		if($homeHealth){
+			$patients = $this->pt_model->searchByHomeHealth($homeHealth);
+
+	
+		}
+
+		echo json_encode($patients);
+
+		
+	}
+
+	public function get_hhc($type = 'add')
+	{
+		$res = $this->pt_model->findHhc($this->input->get('patientID'));
+
+		echo json_encode($res[0]);
+
+	}
+
 	public function get_tov($type = 'add')
 	{
 		$initial_list = [
@@ -115,27 +141,55 @@ class Profile extends \Mobiledrs\core\MY_AJAX_Controller {
 		{
 			if ($tov_data == Type_visit_entity::INITIAL_VISIT_HOME) 
 			{
-				$tov_list .= '<option value="1"> Initial Visit (Home)</option>';
+				$tov_list .= '<option value="'.Type_visit_entity::INITIAL_VISIT_HOME.'"> Initial Visit (Home)</option>';
 			}
 			else if ($tov_data == Type_visit_entity::INITIAL_VISIT_FACILITY) 
 			{
-				$tov_list .= '<option value="2"> Initial Visit (Facility)</option>';
+				$tov_list .= '<option value="'.Type_visit_entity::INITIAL_VISIT_FACILITY.'"> Initial Visit (Facility)</option>';
 			}
 			else if ($tov_data == Type_visit_entity::FOLLOW_UP_HOME) 
 			{
-				$tov_list .= '<option value="3"> Follow-up Visit (Home)</option>';
+				$tov_list .= '<option value="'.Type_visit_entity::FOLLOW_UP_HOME.'"> Follow-up Visit (Home)</option>';
 			}
 			else if ($tov_data == Type_visit_entity::FOLLOW_UP_FACILITY) 
 			{
-				$tov_list .= '<option value="4"> Follow-up Visit (Facility)</option>';
+				$tov_list .= '<option value="'.Type_visit_entity::FOLLOW_UP_FACILITY.'"> Follow-up Visit (Facility)</option>';
 			}
 			else if ($tov_data == Type_visit_entity::INITIAL_VISIT_TELEHEALTH) 
 			{
-				$tov_list .= '<option value="7"> Initial Visit (TeleHealth)</option>';
+				$tov_list .= '<option value="'.Type_visit_entity::INITIAL_VISIT_TELEHEALTH.'"> Initial Visit (TeleHealth)</option>';
 			}
 			else if ($tov_data == Type_visit_entity::FOLLOW_UP_TELEHEALTH) 
 			{
-				$tov_list .= '<option value="8"> Follow-up Visit (TeleHealth)</option>';
+				$tov_list .= '<option value="'.Type_visit_entity::FOLLOW_UP_TELEHEALTH.'"> Follow-up Visit (TeleHealth)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::HOSPICE_FOLLOW_UP_VISIT) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::HOSPICE_FOLLOW_UP_VISIT.'"> Hospice Follow-up Visit (Face to Face)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::HOSPICE_FOLLOW_UP_VISIT_TELEHEALTH) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::HOSPICE_FOLLOW_UP_VISIT_TELEHEALTH.'"> Hospice Follow-up Visit (Telehealth)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::CHANGE_OF_CONDITION) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::CHANGE_OF_CONDITION.'"> Change of Condition Visit (Face to Face)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::CHANGE_OF_CONDITION_TELEHEALTH) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::CHANGE_OF_CONDITION_TELEHEALTH.'"> Change of Condition Visit (Telehealth)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::TRANSITIONAL_CARE) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::TRANSITIONAL_CARE.'"> Transitional Care Visit (Face to Face)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::HOSPICE_EVALUATION_VISIT) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::HOSPICE_EVALUATION_VISIT.'"> Hospice Evaluation Visit (Face to Face)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::HOSPICE_EVALUATION_VISIT_TELEHEALTH) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::HOSPICE_EVALUATION_VISIT_TELEHEALTH.'"> Hospice Evaluation Visit (Telehealth)</option>';
 			}
 		}
 

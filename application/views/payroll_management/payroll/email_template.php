@@ -8,5 +8,5 @@
 <br/>
 <p>
 Regards,<br>
-Michelle Golub
+Ronald Maghanoy
 </p>

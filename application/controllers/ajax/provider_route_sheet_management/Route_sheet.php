@@ -29,7 +29,7 @@ class Route_sheet extends \Mobiledrs\core\MY_AJAX_Controller {
 
 		if ($rs_model_res)
 		{
-			if ($this->session->userdata('user_roleID') != '1') {
+			if ($this->session->userdata('user_roleID') != '2000000001') {
 				$this->logs_model->insert([
 					'data' => [
 						'user_log_userID' => $this->session->userdata('user_id'),
