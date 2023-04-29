@@ -4,7 +4,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Mobile Physicians - Intake Form</title>
+      <title>Mobile Physician - Intake Form</title>
       <style>
          label {
          margin-top: 6px;
@@ -192,7 +192,7 @@
                <td colspan="" width="100px" height="18px">
                <?php
                if($rvr_reason_for_visit == 'Discharged from Hospital'){
-                echo date('m/d/Y', strtotime($rvr_date_discharged));
+                  echo date('m/d/Y', strtotime($rvr_date_discharged));
                }
                ?>
                </td>
@@ -263,20 +263,17 @@
                   <?php
                 }
                ?>
-          
+
             <tr>
                <td colspan="3" height="15px" style="font-size: 1px; ">
                </td>
             </tr>
-            
+      
             <tr>
-               <td colspan="3" height="15px" style="font-size: 5px; ">
+               <td colspan="3" height="25px" style="font-size: 5px; ">
                </td>
             </tr>
-            <tr>
-               <td colspan="3" height="15px">
-               </td>
-            </tr>
+        
             <tr>
                <td height="15px" width="456px">
                <?='<label>  </label>'.$pf_name_of_facility?>
@@ -322,30 +319,14 @@
                </td>
             </tr>
             <tr>
-               <td width="229px" height="18px" >
+               <td>
                <?php 
-                  if($preferred_smd == '38'){
-                    echo '<b> X</b>';
-                  }
+                  echo $preferred_smd;
                   
                   ?>
                </td>
-               <td width="178px" height="18px" >
-               <?php 
-                  if($preferred_smd == '53'){
-                    echo '<b> X</b>';
-                  }
-                  
-                  ?>
-               </td>
-               <td width="220px" height="18px" >
-               <?php 
-                  if($preferred_smd == '33'){
-                    echo '<b> X</b>';
-                  }
-                  
-                  ?>
-               </td>
+            
+               
             </tr>
          </tbody>
       </table>
