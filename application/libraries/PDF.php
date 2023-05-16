@@ -80,7 +80,7 @@ class PDF {
 		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 		// set margins
-		$pdf->SetMargins(0, 45, 0, 0);
+		$pdf->SetMargins(0, 40, 0, 0);
 		$pdf->SetHeaderMargin(0);
 		$pdf->SetFooterMargin(0);
 

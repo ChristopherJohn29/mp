@@ -102,6 +102,19 @@ class Home_visit_request extends \Mobiledrs\core\MY_Controller {
 		// echo "</pre>";
 		// exit;
 		$tmpDir = sys_get_temp_dir() . '/';
+		
+		$md = $this->user_model->getSuperMd();
+
+		$mds = array();
+		$npi = array();
+		foreach ($md as $key => $value) {
+			$mds[$value['provider_id']] = $value['provider_firstname'].' '.$value['provider_lastname'];
+			$npi[$value['provider_id']] = $value['provider_npi'];
+		}
+
+		$data[0]['mds'] = $mds;
+		$data[0]['npi'] = $npi;
+
 		$html = $this->load->view('homevisitrequest/pdf', $data[0], true);
 
 		$this->load->library(['email', 'PDF']);
@@ -157,6 +170,19 @@ class Home_visit_request extends \Mobiledrs\core\MY_Controller {
 		// echo "</pre>";
 		// exit;
 		$tmpDir = sys_get_temp_dir() . '/';
+
+		$md = $this->user_model->getSuperMd();
+
+		$mds = array();
+		$npi = array();
+		foreach ($md as $key => $value) {
+			$mds[$value['provider_id']] = $value['provider_firstname'].' '.$value['provider_lastname'];
+			$npi[$value['provider_id']] = $value['provider_npi'];
+		}
+
+		$data[0]['mds'] = $mds;
+		$data[0]['npi'] = $npi;
+
 		$html = $this->load->view('homevisitrequest/pdf', $data[0], true);
 
 		$this->load->library(['email', 'PDF']);

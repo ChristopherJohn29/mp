@@ -16,10 +16,14 @@
       </style>
    </head>
    <body>
-      <table style="font-size: 13px; margin-top: 100px;" cellpadding="3">
+      <table style="font-size: 13px; margin-top: 230px;" cellpadding="3">
          <tbody>
             <tr>
-               <td width="280px" >
+               <td colspan="2" width="488px"  height="10px" style="font-size: 12px;">
+               </td>
+            </tr>
+            <tr>
+               <td width="295px" >
                </td>
                <td width="173px" height="20px"  colspan="3" >
                 <?= date('m/d/Y', strtotime($date_of_sent)) ?>
@@ -28,23 +32,23 @@
                </td>
             </tr>
             <tr>
-               <td colspan="2" width="488px"  height="20px" style="font-size: 11px;">
+               <td colspan="2" width="488px"  height="5px" style="font-size: 1px;">
                </td>
             </tr>
             <tr>
-               <td colspan="2" width="488px"  height="20px">
+               <td colspan="2" width="488px"  height="10px" style="font-size: 3px;">
                </td>
-               <td width="173px" height="20px">
-               </td>
-            </tr>
-            <tr>
-               <td colspan="2" width="488px"  height="20px">
-               </td>
-               <td width="173px" height="20px">
+               <td width="173px" height="10px">
                </td>
             </tr>
             <tr>
-               <td colspan="2" width="489px"  height="20px">
+               <td colspan="2" width="488px"  height="5px" style="font-size: 3px;">
+               </td>
+               <td width="173px" height="5px">
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2" width="505px"  height="20px">
                 <?='<label>  </label>'.$pi_patient_name?>
                </td>
                <td width="173px" height="20px">
@@ -52,13 +56,13 @@
                </td>
             </tr>
             <tr>
-               <td colspan="2" width="488px"  height="20px">
+               <td colspan="2" width="488px"  height="23px"  style="font-size: 13px;">
                </td>
-               <td width="173px" height="20px">
+               <td width="173px" height="23px"  style="font-size: 13px;">
                </td>
             </tr>
             <tr>
-               <td width="66px" height="50px">
+               <td width="66px" height="48px">
                <?php 
                   if($pi_gender == 'male'){
                     echo '<b>X</b>';
@@ -66,7 +70,7 @@
                   
                   ?>
                </td>
-               <td width="119px" height="50px">
+               <td width="100px" height="48px">
                <?php 
                   if($pi_gender == 'female'){
                     echo '<b>X</b>';
@@ -91,15 +95,15 @@
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px">
+               <td colspan="3" width="520px" height="15px" style="font-size: 8px; ">
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 1px; ">
+               <td colspan="3" width="520px" height="18px" style="font-size: 11px; ">
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 1px; ">
+               <td colspan="3" width="520px" height="18px" style="font-size: 11px; ">
                </td>
             </tr>
             <tr>
@@ -163,11 +167,11 @@
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 15px; ">
+               <td colspan="3" width="520px" height="20px" style="font-size: 20px; ">
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 14px; ">
+               <td colspan="3" width="520px" height="18px" style="font-size: 16px; ">
                </td>
             </tr>
       
@@ -192,7 +196,7 @@
                <td colspan="" width="100px" height="18px">
                <?php
                if($rvr_reason_for_visit == 'Discharged from Hospital'){
-                  echo date('m/d/Y', strtotime($rvr_date_discharged));
+                echo date('m/d/Y', strtotime($rvr_date_discharged));
                }
                ?>
                </td>
@@ -260,20 +264,31 @@
                      <td colspan="3" height="15px" style="font-size: 10px; ">
                      </td>
                   </tr>
+                  <tr>
+                     <td colspan="3" height="15px" style="font-size: 1px; ">
+                     </td>
+                  </tr>
+                  <?php
+                } else {
+                  ?>
+                  <tr>
+                     <td colspan="3" height="16px" style="font-size: 5px; ">
+                     </td>
+                  </tr>
                   <?php
                 }
                ?>
-
+          
+            
+            
             <tr>
-               <td colspan="3" height="15px" style="font-size: 1px; ">
+               <td colspan="3" height="15px" style="font-size: 5px; ">
                </td>
             </tr>
-      
             <tr>
-               <td colspan="3" height="25px" style="font-size: 5px; ">
+               <td colspan="3" height="15px">
                </td>
             </tr>
-        
             <tr>
                <td height="15px" width="456px">
                <?='<label>  </label>'.$pf_name_of_facility?>
@@ -283,22 +298,22 @@
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 16px; ">
+               <td colspan="3" width="520px" height="18px" style="font-size: 15px; ">
                </td>
             </tr>
             <tr>
                <td width="231px" height="18px">
                <?='<label>  </label>'.$pf_phone?>
                </td>
-               <td width="225px" height="18px">
+               <td width="180px" height="18px">
                <?=$pf_fax?>
                </td>
-               <td width="220px" height="18px">
+               <td width="260px" height="18px">
                <?=$pf_email?>
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 17px;">
+               <td colspan="3" width="520px" height="18px" style="font-size: 16px;">
                </td>
             </tr>
             <tr>
@@ -315,13 +330,24 @@
                </td>
             </tr>
             <tr>
-               <td colspan="3" height="18px" style="font-size: 10px;" >
+               <td colspan="3" height="12px" style="font-size: 5px;" >
                </td>
             </tr>
             <tr>
-               <td>
+               <td colspan="3" >
                <?php 
-                  echo $preferred_smd;
+                  echo $mds[$preferred_smd];
+                  
+                  ?>
+               </td>
+            
+               
+            </tr>
+
+            <tr>
+               <td colspan="3" >
+               <?php 
+                  echo "NPI #:".$npi[$preferred_smd];
                   
                   ?>
                </td>
