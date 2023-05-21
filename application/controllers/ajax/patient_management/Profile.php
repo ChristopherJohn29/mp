@@ -191,6 +191,14 @@ class Profile extends \Mobiledrs\core\MY_AJAX_Controller {
 			{
 				$tov_list .= '<option value="'.Type_visit_entity::HOSPICE_EVALUATION_VISIT_TELEHEALTH.'"> Hospice Evaluation Visit (Telehealth)</option>';
 			}
+			else if ($tov_data == Type_visit_entity::COGNITIVE_HOME) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::COGNITIVE_HOME.'"> Cognitive Assesment (Home Visits)</option>';
+			}
+			else if ($tov_data == Type_visit_entity::COGNITIVE_TELEHEALTH) 
+			{
+				$tov_list .= '<option value="'.Type_visit_entity::COGNITIVE_TELEHEALTH.'"> Cognitive Assesment (Telehealth)</option>';
+			}
 		}
 
 		echo $tov_list;
