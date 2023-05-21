@@ -1,7 +1,5 @@
 <?php
 
-use \Mobiledrs\entities\patient_management\Type_visit_entity;
-
 class Profile extends \Mobiledrs\core\MY_Controller {
 	
 	public function __construct()
@@ -254,10 +252,7 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 			'return_type' => 'row'
 		];
 
-		$initial_list = [
-			Type_visit_entity::COGNITIVE_HOME, 
-			Type_visit_entity::COGNITIVE_TELEHEALTH, 
-		];
+		
 
 		$transaction_ca_params = [
 			'order' => [
@@ -294,17 +289,17 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 					'condition' => '',
 	        		'value' => $patient_id
         		],
+				[
+					'key' => 'patient_transactions.is_ca',
+					'condition' => '=',
+	        		'value' => 1
+        		],
         		[
 					'key' => 'patient_transactions.pt_archive',
 					'condition' => '=',
 	        		'value' => NULL
         		]
 			],
-			'where_in_list' => [
-				'key' => 'patient_transactions.pt_tovID',
-				'values' => $initial_list
-			],
-			
 			'return_type' => 'object'
 		];
 

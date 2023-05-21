@@ -5,6 +5,7 @@ class Route_sheet_model extends \Mobiledrs\core\MY_Models {
 	protected $table_name = 'provider_route_sheet';
 	protected $entity = '\Mobiledrs\entities\provider_route_sheet_management\Routesheet_entity';
 	protected $pt_trans_entity = null;
+	use \Mobiledrs\entities\patient_management\Type_visit_entity;
 
 	public function __construct()
 	{
@@ -109,6 +110,20 @@ class Route_sheet_model extends \Mobiledrs\core\MY_Models {
 
 		for ($i = 0; $i < count($inputPost['prsl_fromTime']); $i++) 
 		{
+
+			$is_ca = isset($inputPost['is_ca']) ? $inputPost['is_ca'] : NULL;
+
+			$initial_list = [
+				Type_visit_entity::COGNITIVE_HOME, 
+				Type_visit_entity::COGNITIVE_TELEHEALTH, 
+			];
+
+			if(!$is_ca){
+				if(in_array($inputPost['prsl_tovID'][$i], $initial_list)){
+					$is_ca = 1;
+				}
+			}
+
 			$dataToDB = [
 				'pt_tovID' => $inputPost['prsl_tovID'][$i],
 				'pt_patientID' => $inputPost['prsl_patientID'][$i],
@@ -117,7 +132,7 @@ class Route_sheet_model extends \Mobiledrs\core\MY_Models {
 				'pt_dateRef' => isset($inputPost['prsl_dateRef'][$i]) ? $this->pt_trans_entity->set_date_format($inputPost['prsl_dateRef'][$i]) : NULL,
 				'pt_supervising_mdID' => $inputPost['pt_supervising_mdID'][$i],
 				'pt_reasonForVisit' => isset($inputPost['pt_reasonForVisit'][$i]) ? $inputPost['pt_reasonForVisit'][$i] : NULL,
-				'is_ca' => isset($inputPost['is_ca']) ? $inputPost['is_ca'] : NULL,
+				'is_ca' => $is_ca,
 				'patient_hhcID' => isset($inputPost['patient_hhcID'][$i]) ? $inputPost['patient_hhcID'][$i] : NULL,
 				'pt_aw_ippe_code' => isset($inputPost['pt_aw_ippe_code'][$i]) ? $inputPost['pt_aw_ippe_code'][$i] : NULL,
 				'msp' => isset($inputPost['msp'][$i]) ? $inputPost['msp'][$i] : NULL
