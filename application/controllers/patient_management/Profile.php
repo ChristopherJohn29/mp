@@ -288,10 +288,6 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 				]
 				
 			],
-			'where_in' => [
-				'column' => 'patient_transactions.pt_tovID',
-				'values' => $initial_list
-			],
 			'where' => [
 				[
 					'key' => 'patient_transactions.pt_patientID',
@@ -304,6 +300,11 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 	        		'value' => NULL
         		]
 			],
+			'where_in' => [
+				'column' => 'patient_transactions.pt_tovID',
+				'values' => $initial_list
+			],
+			
 			'return_type' => 'object'
 		];
 
