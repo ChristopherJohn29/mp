@@ -300,8 +300,8 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 	        		'value' => NULL
         		]
 			],
-			'where_in' => [
-				'column' => 'patient_transactions.pt_tovID',
+			'where_in_list' => [
+				'key' => 'patient_transactions.pt_tovID',
 				'values' => $initial_list
 			],
 			
