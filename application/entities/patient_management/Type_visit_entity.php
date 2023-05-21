@@ -71,7 +71,9 @@ class Type_visit_entity extends \Mobiledrs\entities\Entity {
 			self::CHANGE_OF_CONDITION_TELEHEALTH,
 			self::TRANSITIONAL_CARE,
 			self::HOSPICE_EVALUATION_VISIT,
-			self::HOSPICE_EVALUATION_VISIT_TELEHEALTH
+			self::HOSPICE_EVALUATION_VISIT_TELEHEALTH,
+			self::COGNITIVE_HOME,
+			self::COGNITIVE_TELEHEALTH,
 		];
 	}
 
@@ -80,7 +82,9 @@ class Type_visit_entity extends \Mobiledrs\entities\Entity {
 		return [
 			self::INITIAL_VISIT_HOME,
 			self::INITIAL_VISIT_FACILITY,
-			self::INITIAL_VISIT_TELEHEALTH
+			self::INITIAL_VISIT_TELEHEALTH,
+			self::COGNITIVE_HOME,
+			self::COGNITIVE_TELEHEALTH,
 		];
 	}
 
@@ -96,7 +100,9 @@ class Type_visit_entity extends \Mobiledrs\entities\Entity {
 			self::CHANGE_OF_CONDITION_TELEHEALTH,
 			self::TRANSITIONAL_CARE,
 			self::HOSPICE_EVALUATION_VISIT,
-			self::HOSPICE_EVALUATION_VISIT_TELEHEALTH
+			self::HOSPICE_EVALUATION_VISIT_TELEHEALTH,
+			self::COGNITIVE_HOME,
+			self::COGNITIVE_TELEHEALTH,
 		];
 	}
 
