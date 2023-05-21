@@ -139,14 +139,19 @@ class Transaction extends \Mobiledrs\core\MY_Controller {
 			'return_type' => 'row'
 		];
 
+		$initial_list = [
+			Type_visit_entity::COGNITIVE_HOME, 
+			Type_visit_entity::COGNITIVE_TELEHEALTH, 
+		];
 
 		if($is_ca == 'ca'){
-			$transaction_params['where'][] = 
+			$transaction_params['where_in_list'][] = 
 			[
-				'key' => 'patient_transactions.is_ca',
-				'condition' => '=',
-				'value' => 1
+				'key' => 'patient_transactions.pt_tovID',
+				'values' => $initial_list
 			];
+
+			
 		} else {
 			$transaction_params['where'][] = 
 			[
