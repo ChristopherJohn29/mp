@@ -138,12 +138,12 @@
 											<select class="form-control" style="width: 100%;" required="true" name="pt_tovID">
 						
 												<option value="" selected="true">Select</option>
-												<option {{ transaction.pt_tovID == 2000000016 ? 'selected' : ''}} value="2000000016">Cognitive Assesment (Home Visits)</option>
-												<option {{ transaction.pt_tovID == 2000000017 ? 'selected' : ''}} value="2000000017">Cognitive Assesment (Telehealth)</option>
-												<option {{ transaction.pt_tovID == 2000000018 ? 'selected' : ''}} value="2000000018"> Home Health Refused Visit</option>
-												<option {{ transaction.pt_tovID == 2000000019 ? 'selected' : ''}} value="2000000019"> Patient Refused Visit</option>
-												<option {{ transaction.pt_tovID == 2000000005 ? 'selected' : ''}} value="2000000005"> No Show</option>
-												<option {{ transaction.pt_tovID == 2000000006 ? 'selected' : ''}} value="2000000006"> Cancelled</option>
+												<option {{ transaction.pt_tovID == 16 ? 'selected' : ''}} value="16">Cognitive Assesment (Home Visits)</option>
+												<option {{ transaction.pt_tovID == 17 ? 'selected' : ''}} value="17">Cognitive Assesment (Telehealth)</option>
+												<option {{ transaction.pt_tovID == 18 ? 'selected' : ''}} value="18"> Home Health Refused Visit</option>
+												<option {{ transaction.pt_tovID == 19 ? 'selected' : ''}} value="19"> Patient Refused Visit</option>
+												<option {{ transaction.pt_tovID == 05 ? 'selected' : ''}} value="05"> No Show</option>
+												<option {{ transaction.pt_tovID == 06 ? 'selected' : ''}} value="06"> Cancelled</option>
 													
 											</select>
 											<br>

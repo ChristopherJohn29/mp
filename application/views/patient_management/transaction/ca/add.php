@@ -118,12 +118,12 @@
 											<label class="control-label">Type of Visit <span>*</span></label>
 											<select class="form-control" style="width: 100%;" required="true" name="pt_tovID">
 												<option value="" selected="true">Select</option>
-												<option value="2000000016">Cognitive Assesment (Home Visits)</option>
-												<option value="2000000017">Cognitive Assesment (Telehealth)</option>
-												<option value="2000000018">Home Health Refused Visit</option>
-												<option value="2000000019">Patient Refused Visit</option>
-												<option  value="2000000005"> No Show</option>
-												<option  value="2000000006"> Cancelled</option>
+												<option value="16">Cognitive Assesment (Home Visits)</option>
+												<option value="17">Cognitive Assesment (Telehealth)</option>
+												<option value="18">Home Health Refused Visit</option>
+												<option value="19">Patient Refused Visit</option>
+												<option  value="05"> No Show</option>
+												<option  value="06"> Cancelled</option>
 											</select>
 
 											<br>
