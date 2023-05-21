@@ -1,11 +1,13 @@
 <?php
 
+use \Mobiledrs\entities\patient_management\Type_visit_entity;
+
 class Route_sheet_model extends \Mobiledrs\core\MY_Models {
 	
 	protected $table_name = 'provider_route_sheet';
 	protected $entity = '\Mobiledrs\entities\provider_route_sheet_management\Routesheet_entity';
 	protected $pt_trans_entity = null;
-	use \Mobiledrs\entities\patient_management\Type_visit_entity;
+
 
 	public function __construct()
 	{
