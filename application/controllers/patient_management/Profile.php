@@ -1,5 +1,7 @@
 <?php
 
+use \Mobiledrs\entities\patient_management\Type_visit_entity;
+
 class Profile extends \Mobiledrs\core\MY_Controller {
 	
 	public function __construct()
