@@ -252,6 +252,11 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 			'return_type' => 'row'
 		];
 
+		$initial_list = [
+			Type_visit_entity::COGNITIVE_HOME, 
+			Type_visit_entity::COGNITIVE_TELEHEALTH, 
+		];
+
 		$transaction_ca_params = [
 			'order' => [
 				'key' => 'patient_transactions.pt_dateOfService',
@@ -281,16 +286,15 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 				]
 				
 			],
+			'where_in' => [
+				'column' => 'patient_transactions.pt_tovID',
+				'values' => $initial_list
+			],
 			'where' => [
 				[
 					'key' => 'patient_transactions.pt_patientID',
 					'condition' => '',
 	        		'value' => $patient_id
-        		],
-				[
-					'key' => 'patient_transactions.is_ca',
-					'condition' => '=',
-	        		'value' => 1
         		],
         		[
 					'key' => 'patient_transactions.pt_archive',
