@@ -16,6 +16,7 @@
       </style>
    </head>
    <body>
+
       <table style="font-size: 13px; margin-top: 230px;" cellpadding="3">
          <tbody>
             <tr>
@@ -49,7 +50,7 @@
             </tr>
             <tr>
                <td colspan="2" width="505px"  height="20px">
-                <?='<label>  </label>'.$pi_patient_name?>
+                <?='<label></label>'.$pi_patient_name?>
                </td>
                <td width="173px" height="20px">
                <?=date('m/d/Y', strtotime($pi_dob))?>
@@ -87,7 +88,7 @@
             </tr>
             <tr>
                <td colspan="3" width="520px" height="18px">
-               <?='<label>  </label>'.$pi_address?>
+               <?='<label></label>'.$pi_address?>
                </td>
             </tr>
             <tr>
@@ -111,7 +112,7 @@
                   
                      <?php
                   if($ii_medicare){
-                     echo '<label>  </label>'.$ii_medicare;
+                     echo '<label></label>'.$ii_medicare;
                   } else {
                      echo '<br>';
                   }
@@ -135,17 +136,17 @@
                </td>
             </tr>
             <tr>
-               <td colspan="" width="205px" height="18px">
+               <td colspan="" width="180px" height="18px">
                   <label></label><br>
                   <label></label><br>
                   <?php 
                   if($tov == 'Home Visit (Physical)'){
-                    echo '<b> X</b>';
+                    echo '<b>X</b>';
                   }
                   
                   ?>
                </td>
-               <td colspan="" width="126px" height="18px">
+               <td colspan="" width="115px" height="18px">
                   <label></label><br>
                   <label></label><br>
                   <?php 
@@ -167,25 +168,25 @@
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="20px" style="font-size: 20px; ">
+               <td colspan="3" width="520px" height="18px" style="font-size: 16px; ">
                </td>
             </tr>
             <tr>
-               <td colspan="3" width="520px" height="18px" style="font-size: 16px; ">
+               <td colspan="3" width="520px" height="10px" style="font-size: 14px; ">
                </td>
             </tr>
       
             <tr>
-               <td colspan="" width="200px" height="18px" style="font-size: 14px; ">
+               <td colspan="" width="175px" height="33px" style="font-size: 14px; ">
                <?php 
                   if($rvr_reason_for_visit == 'Referral from Home Health'){
-                    echo '<b> X</b>';
+                    echo '<b>X</b>';
                   }
                   
                   ?>
                
                </td>
-               <td colspan="" width="289px" height="18px" style="font-size: 14px; ">
+               <td colspan="" width="289px" height="33px" style="font-size: 14px; ">
                <?php 
                   if($rvr_reason_for_visit == 'Discharged from Hospital'){
                     echo '<b> X</b>';
@@ -193,7 +194,7 @@
                   
                   ?>
                </td>
-               <td colspan="" width="100px" height="18px">
+               <td colspan="" width="100px" height="33px">
                <?php
                if($rvr_reason_for_visit == 'Discharged from Hospital'){
                 echo date('m/d/Y', strtotime($rvr_date_discharged));
@@ -202,20 +203,21 @@
                </td>
             </tr>
             <tr>
-               <td colspan="" width="265px" height="15px" style="font-size: 14px; ">
+               <td rowspan="1" width="240px" height="30px" valign="bottom" style="font-size: 14px; vertical-align: bottom;">
+               
                <?php 
                   if($rvr_reason_for_visit == 'Follow-up Visit'){
-                    echo '<b> X</b>';
+                    echo '<b>X</b>';
                   }
                   
                   ?>
                </td>
-               <td colspan="" width="285px" height="15px" valign="top">
+               <td colspan="" width="285px" height="30px" valign="top">
                <?=$rvr_hospital?>
                </td>
             </tr>
             <tr>
-               <td colspan="" width="205px" height="15px" style="font-size: 14px; ">
+               <td colspan="" width="175px" height="20px" style="font-size: 14px; ">
                <?php 
                   if($rvr_reason_for_visit == 'Transfer of Care'){
                     echo '<b>X</b>';
@@ -223,7 +225,7 @@
                   
                   ?>
                </td>
-               <td colspan="" width="285px" height="15px" valign="top" style="font-size: 14px; ">
+               <td colspan="" width="289px" height="20px" valign="top" style="font-size: 14px; ">
                <?php 
                   if($rvr_reason_for_visit == 'Other Reason'){
                     echo '<b>X</b>';
@@ -233,21 +235,17 @@
                </td>
             </tr>
             <tr>
-               <td colspan="" width="265px" height="15px" style="font-size: 14px; ">
+               <td colspan="" width="200px" height="28px" style="font-size: 11px; ">
                </td>
-               <td colspan="" width="285px" height="15px" valign="top" style="font-size: 14px; ">
-               <b><?=$rvr_reason_for_visit_request?></b>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="3" height="15px" style="font-size: 1px; ">
+               <td colspan="" width="285px" height="28px" valign="top" style="font-size: 11px; ">
+               <?=$rvr_reason_for_visit_request?>
                </td>
             </tr>
             <tr>
                <td colspan="3" height="15px" style="font-size: 11px; ">
                <?php
                 if($rvr_additional_comment){
-                  echo '<label>  </label>'.$rvr_additional_comment;
+                  echo '<label></label>'.$rvr_additional_comment;
                 } else {
                   echo '<br>';
                 }
@@ -291,7 +289,7 @@
             </tr>
             <tr>
                <td height="15px" width="456px">
-               <?='<label>  </label>'.$pf_name_of_facility?>
+               <?='<label></label>'.$pf_name_of_facility?>
                </td>
                <td  height="15px">
                <?=$pf_contact_person?>
@@ -302,10 +300,10 @@
                </td>
             </tr>
             <tr>
-               <td width="231px" height="18px">
-               <?='<label>  </label>'.$pf_phone?>
+               <td width="205px" height="18px">
+               <?='<label></label>'.$pf_phone?>
                </td>
-               <td width="180px" height="18px">
+               <td width="205px" height="18px">
                <?=$pf_fax?>
                </td>
                <td width="260px" height="18px">
@@ -318,7 +316,7 @@
             </tr>
             <tr>
                <td colspan="3" height="18px" >
-               <?='<label>  </label>'.$pf_address?>
+               <?='<label></label>'.$pf_address?>
                </td>
             </tr>
             <tr>
