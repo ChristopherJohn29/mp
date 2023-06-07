@@ -73,6 +73,7 @@
                           {{ list.pt_aw_ippe_code == 'G0402' ? '<br>With IPPE <br>' : ''}}
                             {{ list.pt_aw_ippe_code == 'G0438' ? '<br>With AW <br>' : ''}}
                             {{ list.pt_aw_ippe_code == 'G0439' ? '<br>With AW <br>' : ''}}
+                            {{ list.msp == 'yes' ? '<br>With MSP <br>' : ''}}
                             {{ list.pt_aw_ippe_code ? '' : '<br>No AW / IPPE <br>'}}
                           
                           <span>Other Notes: <br>{{ list.prsl_notes|nl2br }}</span></p></td>

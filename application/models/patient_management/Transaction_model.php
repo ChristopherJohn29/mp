@@ -84,6 +84,16 @@ class Transaction_model extends \Mobiledrs\core\MY_Models {
 			$non_admit_checked_by = '';
 		}
 
+		if(!empty($this->record_entity->is_early_discharge)){
+			if(empty($this->record_entity->is_early_discharge_checked_by)){
+				$is_early_discharge_checked_by = $this->session->userdata('user_fullname');
+			} else {
+				$is_early_discharge_checked_by = $this->record_entity->is_early_discharge_checked_by;
+			}
+		} else {
+			$is_early_discharge_checked_by = '';
+		}
+
 		return [
 			'pt_id' => $this->record_entity->pt_id,
 			'pt_tovID' => $this->record_entity->pt_tovID,
@@ -105,6 +115,8 @@ class Transaction_model extends \Mobiledrs\core\MY_Models {
 			'pt_icd10_codes' => $this->record_entity->pt_icd10_codes,
 			'pt_dateRef' => $this->record_entity->set_date_format($this->record_entity->pt_dateRef),
 			'pt_dateRefEmailed' => $this->record_entity->set_date_format($this->record_entity->pt_dateRefEmailed),
+			'early_discharge_date' => $this->record_entity->set_date_format($this->record_entity->early_discharge_date),
+			'is_early_discharge' => empty($this->record_entity->is_early_discharge) ? 0 : $this->record_entity->is_early_discharge,
 			'pt_notes' => $this->record_entity->pt_notes,
 			'pt_supervising_mdID' => empty($this->record_entity->pt_supervising_mdID) ? null : $this->record_entity->pt_supervising_mdID,
 			'pt_status' => empty($this->record_entity->pt_status) ? null : $this->record_entity->pt_status,
@@ -116,6 +128,7 @@ class Transaction_model extends \Mobiledrs\core\MY_Models {
 			'no_homehealth_ref_checked_by' =>  $no_homehealth_ref_checked_by,
 			'not_our_md_checked_by' => $not_our_md_checked_by,
 			'non_admit_checked_by' => $non_admit_checked_by,
+			'is_early_discharge_checked_by' => $is_early_discharge_checked_by,
 			'is_ca' => $this->record_entity->is_ca ?  $this->record_entity->is_ca : NULL,
 			'patient_hhcID' => empty($_POST['patient_homehealth']) ? null : $this->record_entity->patient_hhcID,
 			'userId' => $this->session->userdata('user_id')

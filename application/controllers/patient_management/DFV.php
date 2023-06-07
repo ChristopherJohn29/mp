@@ -317,6 +317,11 @@ class DFV extends \Mobiledrs\core\MY_Controller {
 					'condition' => '=',
 	        		'value' => 0
         		],
+				[
+					'key' => "patient_transactions.is_early_discharge",
+					'condition' => '=',
+	        		'value' => 0
+        		],
 
 			],
 			'return_type' => 'object'

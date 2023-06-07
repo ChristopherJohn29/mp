@@ -51,6 +51,9 @@ class Transaction_entity extends \Mobiledrs\entities\Entity {
 	protected $msp;
 	protected $patient_hhcID_2;
 	protected $hhc_email_additional;
+	protected $is_early_discharge;
+	protected $early_discharge_date;
+	protected $is_early_discharge_checked_by;
 
 	protected $user_id;
 	protected $user_firstname;

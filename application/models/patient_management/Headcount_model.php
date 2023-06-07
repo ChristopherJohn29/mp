@@ -12,9 +12,9 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 		parent::__construct();
 	}
 
-	public function prepare_dateRange(string $month, string $fromDate, string $toDate, string $year) {
+	public function prepare_dateRange(string $month, string $tomonth, string $fromDate, string $toDate, string $year) {
 		$this->fromDate = $year . '-' . $month . '-' . $fromDate;
-		$this->toDate = $year . '-' . $month . '-' . $toDate;
+		$this->toDate = $year . '-' . $tomonth . '-' . $toDate;
 	}
 
 	public function get_total_patients($tableColumn = '', $sortDirection = '') : array
@@ -30,12 +30,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 					'join_table_key' => 'provider.provider_id',
 					'join_table_condition' => '=',
 					'join_table_value' => 'patient_transactions.pt_providerID',
-					'join_table_type' => 'left'
-				],[
-					'join_table_name' => 'type_of_visits',
-					'join_table_key' => 'type_of_visits.tov_id',
-					'join_table_condition' => '=',
-					'join_table_value' => 'patient_transactions.pt_tovID',
 					'join_table_type' => 'left'
 				]
 			],
@@ -82,7 +76,7 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 				'patient_name' => $patient_details->patient_name,
 				'provider' => $transaction->get_provider_fullname(),
 				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
-				'typeOfVisit' => $transaction->tov_name,
+				'deductible' => $transaction->pt_deductible,
 				'home_health' => $patient_details->hhc_name,
 				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
 				'aw_billed' => $transaction->get_date_format($transaction->pt_aw_billed),
@@ -170,7 +164,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 				'patient_name' => $patient_details->patient_name,
 				'provider' => $transaction_details ? $transaction_details->get_provider_fullname() : '',
 				'dateOfService' => $transaction_details ? $transaction_details->get_date_format($transaction_details->pt_dateOfService)  : '',
-				'typeOfVisit' => $transaction_details ? $transaction_details->tov_name : '',
 				'deductible' => $transaction_details ? $transaction_details->pt_deductible : '',
 				'home_health' => $transaction_details ? $patient_details->hhc_name : '',
 				'paid' => $transaction_details ? $transaction_details->get_date_format($transaction_details->pt_service_billed) : '',
@@ -182,6 +175,156 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 
 		return $headcount_list;
 	}
+
+	public function get_total_ca($tableColumn = '', $sortDirection = '') : array
+	{
+		$transaction_params = [
+			'order' => [
+				'key' => 'patient_transactions.pt_dateOfService',
+				'by' => 'DESC'
+			],
+			'joins' => [
+				[
+					'join_table_name' => 'provider',
+					'join_table_key' => 'provider.provider_id',
+					'join_table_condition' => '=',
+					'join_table_value' => 'patient_transactions.pt_providerID',
+					'join_table_type' => 'left'
+				]
+			],
+			'where' => [
+				[
+					'key' => 'patient_transactions.pt_dateOfService',
+					'condition' => '>=',
+	        		'value' => $this->fromDate
+        		],
+        		[
+					'key' => 'patient_transactions.pt_dateOfService',
+					'condition' => '<=',
+	        		'value' => $this->toDate
+        		],
+        		[
+					'key' => 'patient_transactions.is_ca',
+					'condition' => '=',
+	        		'value' => 1
+        		],
+        		[
+					'key' => 'patient_transactions.pt_archive',
+					'condition' => '=',
+	        		'value' => NULL
+        		]
+			],
+			'return_type' => 'object'
+		];
+
+		$transactions = $this->transaction_model->get_records_by_join($transaction_params);
+
+	
+		if (empty($transactions))
+		{
+			return [];
+		}
+
+		$headcount_list = [];
+
+		foreach ($transactions as $index => $transaction) 
+		{
+			$patient_details = $this->get_patient_details($transaction->pt_patientID);
+			$cpo_details = $this->get_cpo_details($transaction->pt_patientID);
+
+			$headcount_list[] = [
+				'patient_id' => $patient_details->patient_id,
+				'patient_name' => $patient_details->patient_name,
+				'provider' => $transaction->get_provider_fullname(),
+				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
+				'deductible' => $transaction->pt_deductible,
+				'home_health' => $patient_details->hhc_name,
+				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
+				'aw_billed' => $transaction->get_date_format($transaction->pt_aw_billed),
+				'visit_billed' => $transaction->get_date_format($transaction->pt_visitBilled),
+				'cpo_billed' => $cpo_details ? $cpo_details->get_date_format($cpo_details->ptcpo_dateBilled) : '',
+				'pt_supervising_mdID' => $transaction->pt_supervising_mdID
+			];
+		}
+
+		return $headcount_list;
+	}
+
+
+	public function get_total_acv($tableColumn = '', $sortDirection = '') : array
+	{
+		$transaction_params = [
+			'order' => [
+				'key' => 'patient_transactions.pt_dateOfService',
+				'by' => 'DESC'
+			],
+			'joins' => [
+				[
+					'join_table_name' => 'provider',
+					'join_table_key' => 'provider.provider_id',
+					'join_table_condition' => '=',
+					'join_table_value' => 'patient_transactions.pt_providerID',
+					'join_table_type' => 'left'
+				]
+			],
+			'where' => [
+				[
+					'key' => 'patient_transactions.pt_dateOfService',
+					'condition' => '>=',
+	        		'value' => $this->fromDate
+        		],
+        		[
+					'key' => 'patient_transactions.pt_dateOfService',
+					'condition' => '<=',
+	        		'value' => $this->toDate
+        		],
+        		[
+					'key' => 'patient_transactions.pt_acv',
+					'condition' => '=',
+	        		'value' => 1
+        		],
+        		[
+					'key' => 'patient_transactions.pt_archive',
+					'condition' => '=',
+	        		'value' => NULL
+        		]
+			],
+			'return_type' => 'object'
+		];
+
+		$transactions = $this->transaction_model->get_records_by_join($transaction_params);
+
+	
+		if (empty($transactions))
+		{
+			return [];
+		}
+
+		$headcount_list = [];
+
+		foreach ($transactions as $index => $transaction) 
+		{
+			$patient_details = $this->get_patient_details($transaction->pt_patientID);
+			$cpo_details = $this->get_cpo_details($transaction->pt_patientID);
+
+			$headcount_list[] = [
+				'patient_id' => $patient_details->patient_id,
+				'patient_name' => $patient_details->patient_name,
+				'provider' => $transaction->get_provider_fullname(),
+				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
+				'deductible' => $transaction->pt_deductible,
+				'home_health' => $patient_details->hhc_name,
+				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
+				'aw_billed' => $transaction->get_date_format($transaction->pt_aw_billed),
+				'visit_billed' => $transaction->get_date_format($transaction->pt_visitBilled),
+				'cpo_billed' => $cpo_details ? $cpo_details->get_date_format($cpo_details->ptcpo_dateBilled) : '',
+				'pt_supervising_mdID' => $transaction->pt_supervising_mdID
+			];
+		}
+
+		return $headcount_list;
+	}
+
 
 	public function get_unbilled_aw($tableColumn = '', $sortDirection = '') : array
 	{
@@ -196,12 +339,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 					'join_table_key' => 'provider.provider_id',
 					'join_table_condition' => '=',
 					'join_table_value' => 'patient_transactions.pt_providerID',
-					'join_table_type' => 'left'
-				],[
-					'join_table_name' => 'type_of_visits',
-					'join_table_key' => 'type_of_visits.tov_id',
-					'join_table_condition' => '=',
-					'join_table_value' => 'patient_transactions.pt_tovID',
 					'join_table_type' => 'left'
 				]
 			],
@@ -253,7 +390,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 				'patient_name' => $patient_details->patient_name,
 				'provider' => $transaction->get_provider_fullname(),
 				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
-				'typeOfVisit' => $transaction->tov_name,
 				'deductible' => $transaction->pt_deductible,
 				'home_health' => $patient_details->hhc_name,
 				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
@@ -280,12 +416,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 					'join_table_key' => 'provider.provider_id',
 					'join_table_condition' => '=',
 					'join_table_value' => 'patient_transactions.pt_providerID',
-					'join_table_type' => 'left'
-				],[
-					'join_table_name' => 'type_of_visits',
-					'join_table_key' => 'type_of_visits.tov_id',
-					'join_table_condition' => '=',
-					'join_table_value' => 'patient_transactions.pt_tovID',
 					'join_table_type' => 'left'
 				]
 			],
@@ -337,7 +467,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 				'patient_name' => $patient_details->patient_name,
 				'provider' => $transaction->get_provider_fullname(),
 				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
-				'typeOfVisit' => $transaction->tov_name,
 				'deductible' => $transaction->pt_deductible,
 				'home_health' => $patient_details->hhc_name,
 				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
@@ -353,6 +482,7 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 
 	public function get_blank_diagnoses($tableColumn = '', $sortDirection = '') : array
 	{
+		$where = "(patient_transactions.pt_icd10_codes='' OR patient_transactions.pt_icd10_codes IS NULL)";
 		$transaction_params = [
 			'order' => [
 				'key' => 'patient_transactions.pt_dateOfService',
@@ -364,12 +494,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 					'join_table_key' => 'provider.provider_id',
 					'join_table_condition' => '=',
 					'join_table_value' => 'patient_transactions.pt_providerID',
-					'join_table_type' => 'left'
-				],[
-					'join_table_name' => 'type_of_visits',
-					'join_table_key' => 'type_of_visits.tov_id',
-					'join_table_condition' => '=',
-					'join_table_value' => 'patient_transactions.pt_tovID',
 					'join_table_type' => 'left'
 				]
 			],
@@ -385,23 +509,12 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 	        		'value' => $this->toDate
         		],
         		[
-					'key' => 'patient_transactions.pt_icd10_codes',
-					'condition' => '',
-	        		'value' => ''
-        		]
-			],
-			'whereOr' => [
-				[
-					'key' => 'patient_transactions.pt_icd10_codes',
+					'key' => 'patient_transactions.pt_archive',
 					'condition' => '=',
 	        		'value' => NULL
-        		],
-				[
-					'key' => 'patient_transactions.pt_icd10_codes',
-					'condition' => '=',
-	        		'value' => ''
-        		],
+        		]
 			],
+			'whereCustom' => $where,
 			'where_in_list' => [
 				'key' => 'patient_transactions.pt_tovID',
 				'values' => Type_visit_entity::get_visits_list()
@@ -428,7 +541,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 				'patient_name' => $patient_details->patient_name,
 				'provider' => $transaction->get_provider_fullname(),
 				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
-				'typeOfVisit' => $transaction->tov_name,
 				'deductible' => $transaction->pt_deductible,
 				'home_health' => $patient_details->hhc_name,
 				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
@@ -456,12 +568,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 					'join_table_condition' => '=',
 					'join_table_value' => 'patient_transactions.pt_providerID',
 					'join_table_type' => 'left'
-				],[
-					'join_table_name' => 'type_of_visits',
-					'join_table_key' => 'type_of_visits.tov_id',
-					'join_table_condition' => '=',
-					'join_table_value' => 'patient_transactions.pt_tovID',
-					'join_table_type' => 'left'
 				]
 			],
 			'where' => [
@@ -483,7 +589,7 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 			],
 			'where_in_list' => [
 				'key' => 'patient_transactions.pt_tovID',
-				'values' => Type_visit_entity::NO_SHOW
+				'values' => Type_visit_entity::get_noshow_list()
 			],
 			'return_type' => 'object'
 		];
@@ -507,7 +613,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 				'patient_name' => $patient_details->patient_name,
 				'provider' => $transaction->get_provider_fullname(),
 				'dateOfService' => $transaction->get_date_format($transaction->pt_dateOfService),
-				'typeOfVisit' => $transaction->tov_name,
 				'deductible' => $transaction->pt_deductible,
 				'home_health' => $patient_details->hhc_name,
 				'paid' => $transaction->get_date_format($transaction->pt_service_billed),
@@ -589,12 +694,6 @@ class Headcount_model extends \Mobiledrs\core\MY_Models {
 					'join_table_key' => 'provider.provider_id',
 					'join_table_condition' => '=',
 					'join_table_value' => 'patient_transactions.pt_providerID',
-					'join_table_type' => 'left'
-				],[
-					'join_table_name' => 'type_of_visits',
-					'join_table_key' => 'type_of_visits.tov_id',
-					'join_table_condition' => '=',
-					'join_table_value' => 'patient_transactions.pt_tovID',
 					'join_table_type' => 'left'
 				]
 			],

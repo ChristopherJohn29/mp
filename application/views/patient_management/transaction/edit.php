@@ -50,6 +50,11 @@
 
 										{% else %}
 										{% endif %}
+
+										<input type="hidden" name="no_homehealth_ref_checked_by" value="{{ transaction.no_homehealth_ref_checked_by }}">
+										<input type="hidden" name="not_our_md_checked_by" value="{{ transaction.not_our_md_checked_by }}">
+										<input type="hidden" name="non_admit_checked_by" value="{{ transaction.non_admit_checked_by }}">
+										<input type="hidden" name="is_early_discharge_checked_by" value="{{ transaction.is_early_discharge_checked_by }}">
 									
 										<div class="col-lg-6">
 											<p class="lead"><span>Patient Name: </span> {{ record.patient_name }}</p>
@@ -384,6 +389,13 @@
 									    <input type="checkbox" class="form-check-input" id="non_admit" name="non_admit" value="1" {{ transaction.non_admit ? 'checked' : '' }}>
 									    <label class="form-check-label" for="non_admit">Non-admit</label>
 									  </div>
+
+									  <div class="col-md-3 form-check mb-10">
+									    <input type="checkbox" class="form-check-input" id="is_early_discharge" name="is_early_discharge" value="1" {{ transaction.is_early_discharge ? 'checked' : '' }}>
+									    <label class="form-check-label" for="labOrdes">Early Discharge</label>
+										<input type="text" class="form-control" id="early_discharge_date" placeholder="Date" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="early_discharge_date" value="{{ set_value('early_discharge_date', transaction.get_date_format(transaction.early_discharge_date)) }}" {{ transaction.is_early_discharge ? 'required' : '' }}>
+								
+									</div>
 
 										
 										<div class="col-md-12 form-group">

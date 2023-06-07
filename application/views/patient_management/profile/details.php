@@ -239,8 +239,23 @@
 
                                                 {%  if transaction.non_admit_checked_by %} 
                                                 - Last updated by {{transaction.non_admit_checked_by}}
+                                                </span>
+                                                <br>
                                                 {% endif %}
+
+                                                    {%  if transaction.is_early_discharge %} 
+                                      
+                                                    <span class="visit_redbg">
+                                                    
+                                                    <input type="checkbox" class="form-check-input" id="is_early_discharge" name="is_early_discharge" checked value="1" onclick="return false;">
+                                                    <label class="form-check-label" for="non_admit">Early Discharged {{transaction.early_discharge_date|date('m/d/Y')}}</label>
+                                                    
+                                                    {% endif %}
+
+                                                    {%  if transaction.is_early_discharge_checked_by %} 
+                                                    - Last updated by {{transaction.is_early_discharge_checked_by}}
                                                     </span>
+                                                    {% endif %}
                                                     
                                                 </div>
 
