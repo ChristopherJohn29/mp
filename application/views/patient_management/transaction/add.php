@@ -110,7 +110,7 @@
 										<div class="col-md-6 form-group {{ form_error('pt_dateRefEmailed') ? 'has-error' : '' }}">
 										
 											<label class="control-label">Date Referral was Emailed <span>*</span></label>
-											<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="pt_dateRefEmailed" value="" required="true">
+											<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="pt_dateRefEmailed" value="">
 											
 										</div>
 
