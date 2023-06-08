@@ -348,10 +348,26 @@
 
 									</div>
 
-									<div class="col-md-12 form-check" style="margin-top: 10px;">
-									    <input type="file" class="form-check-input" id="userfile" name="userfile[]" multiple accept=".pdf,.jpg,.jpeg,.png,.gif">
-									    <!-- <label class="form-check-label" for="labOrdes">Files</label> -->
-									  </div>
+									<div class="col-md-12 form-group">
+
+												<label>Reason for Visit <span>*</span></label>
+												<select class="form-control" required="true" name="pt_reasonForVisit">
+													<option value="">Select</option>
+														<option value="Follow-up Visit" {{ transaction.pt_reasonForVisit == 'Follow-up Visit' ? 'selected=true' : '' }}>Follow-up Visit</option>
+														<option value="Discharged from hospital" {{ transaction.pt_reasonForVisit == 'Discharged from hospital' ? 'selected=true' : '' }}>Discharged from hospital</option>
+														<option value="Home Health Referral/Admission" {{ transaction.pt_reasonForVisit == 'Home Health Referral/Admission' ? 'selected=true' : '' }}>Home Health Referral/Admission</option>
+														<option value="Transfer of Care" {{ transaction.pt_reasonForVisit == 'Transfer of Care' ? 'selected=true' : '' }}>Transfer of Care</option>
+														<option value="Office Request Visit (Meds / Labs)" {{ transaction.pt_reasonForVisit == 'Office Request Visit (Meds / Labs)' ? 'selected=true' : '' }}>Office Request Visit</option>
+														<option value="Patient Requested For Assessment Only" {{ transaction.pt_reasonForVisit == 'Patient Requested For Assessment Only' ? 'selected=true' : '' }}>Patient Requested For Assessment Only</option>
+												</select>
+												<br>
+										</div>
+
+											<div class="col-md-12 form-check" style="">
+											<label class="control-label">Upload Intake Form File </label>
+											<input type="file" class="form-check-input" id="userfile" name="userfile[]" multiple accept=".pdf,.jpg,.jpeg,.png,.gif">
+											<!-- <label class="form-check-label" for="labOrdes">Files</label> -->
+										</div>
 
 									  {% if transaction.transaction_file %}
 										{% set datas = transaction.transaction_file|split(',') %}

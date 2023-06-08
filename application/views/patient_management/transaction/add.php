@@ -225,6 +225,17 @@
 											</select>
 											
 										</div>
+
+										<div class="col-md-3 form-group {{ form_error('pt_acv') ? 'has-error' : '' }}">
+										
+											<label class="control-label">Agreed to Cognitive Visit</label>
+											<select class="form-control" style="width: 100%;" name="pt_acv">
+												<option value="" selected="true">Select</option>
+												<option value="1">Yes</option>
+												<option value="2">No</option>
+											</select>
+											
+										</div>
 										
 										<div class="col-md-3 form-group {{ form_error('pt_diabetes') ? 'has-error' : '' }}">
 										
@@ -333,6 +344,20 @@
 
 										<div class="col-md-12 has-error">
 											<span class="help-block">{{ form_error('pt_icd10_codes') }}</span>
+										</div>
+
+										<div class="col-md-12 form-group">
+											<label>Reason for Visit <span>*</span></label>
+											<select class="form-control" required="true" name="pt_reasonForVisit">
+												<option value="">Select</option>
+													<option value="Follow-up Visit">Follow-up Visit</option>
+													<option value="Discharged from hospital">Discharged from hospital</option>
+													<option value="Home Health Referral/Admission">Home Health Referral/Admission</option>
+													<option value="Transfer of Care">Transfer of Care</option>
+													<option value="Office Request Visit (Meds / Labs)">Office Request Visit</option>
+													<option value="Patient Requested For Assessment Only">Patient Requested For Assessment Only</option>
+											</select>
+											<br>
 										</div>
 
 										<div class="col-md-12 form-check" style="">

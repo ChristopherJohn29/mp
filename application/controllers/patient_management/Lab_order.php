@@ -179,12 +179,12 @@ class Lab_order extends \Mobiledrs\core\MY_Controller {
 			}else {
 				$data['lab_order_file'] = 'No Files available';
 			}    
+
+			$data['date_referral'] =  date('Y-m-d');
 			$this->lab_orders_model->addLabOrder($data);
 		} else {
 
-
 			if (!empty($_FILES['userfile']['name'][0])) {
-		
 				$data['lab_order_file'] = $this->upload_files($_FILES['userfile']);
 			}else {
 				
@@ -196,15 +196,9 @@ class Lab_order extends \Mobiledrs\core\MY_Controller {
 				
 			}	
 
-
 			$data['lab_order_id'] = $this->input->post('lab_order_id');
-
-
 			$this->lab_orders_model->editLabOrder($data);
 		}
-
-
-
 
 		$log = [];
 		if ($page_type == 'edit') {
