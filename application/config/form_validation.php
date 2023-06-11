@@ -28,7 +28,7 @@ $config = array(
             )
         ),
         array(
-            'field' => 'user_password',
+            'field' => 'new_user_password',
             'label' => 'Password',
             'rules' => 'required|min_length[8]',
             'errors' => array(
@@ -38,7 +38,7 @@ $config = array(
         array(
             'field' => 'confirm_password',
             'label' => 'Confirm Password',
-            'rules' => 'required|min_length[8]|matches[user_password]',
+            'rules' => 'required|min_length[8]|matches[new_user_password]',
             'errors' => array(
                 'required' => 'This field is required.'
             )
@@ -65,22 +65,6 @@ $config = array(
             'field' => 'user_lastname',
             'label' => 'Lastname',
             'rules' => 'required|max_length[45]',
-            'errors' => array(
-                'required' => 'This field is required.'
-            )
-        ),
-        array(
-            'field' => 'user_password',
-            'label' => 'Password',
-            'rules' => 'required|min_length[8]',
-            'errors' => array(
-                'required' => 'This field is required.'
-            )
-        ),
-        array(
-            'field' => 'confirm_password',
-            'label' => 'Confirm Password',
-            'rules' => 'required|min_length[8]|matches[user_password]',
             'errors' => array(
                 'required' => 'This field is required.'
             )

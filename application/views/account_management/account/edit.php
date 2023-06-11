@@ -42,6 +42,15 @@
                                     <div class="col-md-12">
                                         <p class="lead">Personal Information</p>
                                     </div>
+
+                                    <input type="hidden" class="form-control" name="user_password" value="{{ set_value('user_password', record.user_password) }}">
+                                    <input type="hidden" class="form-control" name="user_photo" value="{{ set_value('user_photo', record.user_photo) }}">
+
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+										<label class="control-label">Profile picture <span></span></label>
+										<input type="file" name="userFile" accept="image/*">
+									</div>
+                                    
                                     
                                     <div class="col-md-6 form-group {{ form_error('user_firstname') ? 'has-error' : '' }}">
                                     
@@ -82,15 +91,15 @@
                                                                         
                                     <div class="col-md-6 form-group {{ form_error('user_password') ? 'has-error' : '' }}">
                                     
-                                        <label class="control-label">Password <span>*</span></label>
-                                        <input type="password" class="form-control" required="true" name="user_password">
+                                        <label class="control-label">Password <span></span></label>
+                                        <input type="password" id="password" class="form-control update-password" name="new_user_password">
                                         
                                     </div>
                                     
                                     <div class="col-md-6 form-group {{ form_error('confirm_password') ? 'has-error' : '' }}">
                                     
-                                        <label class="control-label">Confirm Password <span>*</span></label>
-                                        <input type="password" class="form-control" required="true" name="confirm_password">
+                                        <label class="control-label">Confirm Password <span></span></label>
+                                        <input type="password" id="confirm_password" class="form-control update-confirm-password" name="confirm_password">
                                         
                                     </div>
 

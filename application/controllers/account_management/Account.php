@@ -45,6 +45,19 @@ class Account extends \Mobiledrs\core\MY_Controller {
 			redirect('errors/page_not_found');
 		}
 
+		$_SERVER["REQUEST_METHOD"] = "POST";
+	
+		$config['upload_path']          = './uploads/';
+		$config['allowed_types']        = 'gif|jpg|png|jpeg';
+
+		$this->load->library('upload', $config);
+
+		if ( $this->upload->do_upload('userFile'))
+		{
+			$data = $this->upload->data();
+			$_POST['user_photo'] = $data['file_name'];
+		}
+		
 		$params = [
 			'record_id' => $user_id,
 			'table_key' => 'user_id',
