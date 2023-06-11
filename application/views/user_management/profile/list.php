@@ -77,7 +77,7 @@
 					  {% for record in records %}
 						
 						<tr>
-							<td class="tooltips">{{ highlight_phrase(record.get_fullname, highlight, '<span style="background-color: #f1d40f;">', '</span>') }}</td>
+							<td class="tooltips">{{ highlight_phrase(record.get_fullname, highlight, '<span style="background-color: #f1d40f;">', '</span>') }}
 							{% if record.user_photo %}
 							<img class="tooltiptext" src="../../../uploads/{{ record.user_photo }}">
 							{% endif %}
