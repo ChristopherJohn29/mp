@@ -20,4 +20,5 @@ class Logs_entity extends \Mobiledrs\entities\Entity {
 	protected $user_roleID;
 	protected $user_sessionID;
 	protected $user_archive;
+	protected $user_photo;
 }
