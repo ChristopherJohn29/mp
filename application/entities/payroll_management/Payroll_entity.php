@@ -216,7 +216,7 @@ class Payroll_entity {
 			{
 				$computed['no_show']['qty'] += 1;
 
-				$computed['total_visits'] += 1;
+				// $computed['total_visits'] += 1;
 			}
 			else if ((int) $provider_transaction->tov_id == $this->type_of_visits::COGNITIVE_HOME)
 			{
