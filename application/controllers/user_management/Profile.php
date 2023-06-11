@@ -123,6 +123,19 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 	        	'value' => $user_id
 			];
 
+			$_SERVER["REQUEST_METHOD"] = "POST";
+	
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'gif|jpg|png|jpeg';
+
+			$this->load->library('upload', $config);
+
+			if ( $this->upload->do_upload('userFile'))
+			{
+				$data = $this->upload->data();
+				$_POST['user_photo'] = $data['file_name'];
+			}
+
 			$user_record = $this->profile_model->record($params);
 
 			if ( ! $user_record)
@@ -142,6 +155,19 @@ class Profile extends \Mobiledrs\core\MY_Controller {
 		else
 		{
 			$validation_group = 'user_management/profile/save';
+
+			$_SERVER["REQUEST_METHOD"] = "POST";
+	
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'gif|jpg|png|jpeg';
+
+			$this->load->library('upload', $config);
+
+			if ( $this->upload->do_upload('userFile'))
+			{
+				$data = $this->upload->data();
+				$_POST['provider_photo'] = $data['file_name'];
+			}
 		}
 
 		$params = [
