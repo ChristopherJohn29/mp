@@ -106,6 +106,7 @@ class Transaction_model extends \Mobiledrs\core\MY_Models {
 			'pt_aw_ippe_code' => $this->record_entity->pt_aw_ippe_code,
 			'pt_performed' => $this->record_entity->pt_performed,
 			'pt_acp' => $this->record_entity->pt_acp,
+			'pt_acv' => $this->record_entity->pt_acv,
 			'pt_diabetes' => $this->record_entity->pt_diabetes,
 			'pt_hypertension' => $this->record_entity->pt_hypertension,
 			'pt_tobacco' => $this->record_entity->pt_tobacco,
