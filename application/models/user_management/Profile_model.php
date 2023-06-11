@@ -33,7 +33,8 @@ class Profile_model extends \Mobiledrs\core\MY_Models {
 			'user_lastname' => $this->record_entity->user_lastname,
 			'user_email' => $this->record_entity->user_email,
 			'user_password' => $this->record_entity->encrypt_password(),
-			'user_roleID' => $this->record_entity->user_roleID
+			'user_roleID' => $this->record_entity->user_roleID,
+			'user_photo' => $this->record_entity->user_photo
 		];
 	}
 }
