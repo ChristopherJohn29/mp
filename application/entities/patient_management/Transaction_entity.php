@@ -19,6 +19,7 @@ class Transaction_entity extends \Mobiledrs\entities\Entity {
 	protected $pt_aw_ippe_code;
 	protected $pt_performed;
 	protected $pt_acp;
+	protected $pt_acv;
 	protected $pt_diabetes;
 	protected $pt_tobacco;
 	protected $pt_tcm;
