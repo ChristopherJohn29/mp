@@ -24,6 +24,13 @@ class Type_visit_entity extends \Mobiledrs\entities\Entity {
 
 	protected $tov_id; 
 	protected $tov_name;
+
+	public static function get_noshow_list() : array
+	{
+		return [
+			self::NO_SHOW,
+		];
+	}
 	
 	public static function get_visits_list() : array
 	{

@@ -109,7 +109,7 @@
 
 										<div class="col-md-6 form-group {{ form_error('pt_dateRefEmailed') ? 'has-error' : '' }}">
 										
-											<label class="control-label">Date Referral was Emailed <span>*</span></label>
+											<label class="control-label">Date Referral was Emailed </label>
 											<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask name="pt_dateRefEmailed" value="">
 											
 										</div>
@@ -361,10 +361,10 @@
 										</div>
 
 										<div class="col-md-12 form-check" style="">
-										<label class="control-label">Upload Intake Form File</label>
-									    <input type="file" class="form-check-input" id="userfile" name="userfile[]" multiple accept=".pdf,.jpg,.jpeg,.png,.gif">
-									    <!-- <label class="form-check-label" for="labOrdes">Files</label> -->
-									  </div>
+											<label class="control-label">Upload Intake Form File</label>
+											<input type="file" class="form-check-input" id="userfile" name="userfile[]" multiple accept=".pdf,.jpg,.jpeg,.png,.gif">
+											<!-- <label class="form-check-label" for="labOrdes">Files</label> -->
+										</div>
 
 										<div class="col-md-12 form-check" style="margin-top: 10px;">
 									    <input type="checkbox" class="form-check-input" id="labOrdes" name="lab_orders">
