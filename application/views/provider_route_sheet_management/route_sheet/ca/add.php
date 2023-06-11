@@ -187,6 +187,17 @@
 												<span class="help-block">{{ form_error('prsl_dateRef') }}</span>
 											</div>
 
+											<div class="col-md-12 form-group">
+
+												<label>MSP <span>*</span></label>
+												<select class="form-control" required="true" name="msp[]">
+													<option value="">Select</option>
+													<option value="yes">Yes</option>
+													<option value="no">No</option>
+														
+												</select>
+											</div>
+
 									
 											
 											<div class="col-md-12 form-group {{ form_error('prsl_notes') ? 'has-error' : '' }}"  style="margin-top: 10px;">
