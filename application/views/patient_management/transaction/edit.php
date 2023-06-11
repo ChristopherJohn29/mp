@@ -235,13 +235,24 @@
 											<span class="help-block text-right">{{ form_error('pt_performed') }}</span>
 										</div>
 										
-										<div class="col-md-6 form-group {{ form_error('pt_acp') ? 'has-error' : '' }}">
+										<div class="col-md-3 form-group {{ form_error('pt_acp') ? 'has-error' : '' }}">
 										
 											<label class="control-label">ACP</label>
 											<select class="form-control" style="width: 100%;"  name="pt_acp">
 												<option value="" selected="true">Select</option>
 												<option value="1" {{ transaction.get_selected_choice(transaction.pt_acp, '1') }}>Yes</option>
 												<option value="2" {{ transaction.get_selected_choice(transaction.pt_acp, '2') }}>No</option>
+											</select>
+											
+										</div>
+
+										<div class="col-md-3 form-group {{ form_error('pt_acv') ? 'has-error' : '' }}">
+										
+											<label class="control-label">Agreed to Cognitive Visit</label>
+											<select class="form-control" style="width: 100%;"  name="pt_acv">
+												<option value="" selected="true">Select</option>
+												<option value="1" {{ transaction.get_selected_choice(transaction.pt_acv, '1') }}>Yes</option>
+												<option value="2" {{ transaction.get_selected_choice(transaction.pt_acv, '2') }}>No</option>
 											</select>
 											
 										</div>

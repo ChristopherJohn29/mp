@@ -215,7 +215,7 @@
 											<span class="help-block text-right">{{ form_error('pt_performed') }}</span>
 										</div>
 										
-										<div class="col-md-6 form-group {{ form_error('pt_acp') ? 'has-error' : '' }}">
+										<div class="col-md-3 form-group {{ form_error('pt_acp') ? 'has-error' : '' }}">
 										
 											<label class="control-label">ACP</label>
 											<select class="form-control" style="width: 100%;" name="pt_acp">
