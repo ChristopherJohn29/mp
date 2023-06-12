@@ -41,8 +41,6 @@ class Type_visit_entity extends \Mobiledrs\entities\Entity {
 			self::FOLLOW_UP_FACILITY,
 			self::INITIAL_VISIT_TELEHEALTH,
 			self::FOLLOW_UP_TELEHEALTH,
-			self::NO_SHOW,
-			self::CANCELLED,
 			self::HOSPICE_FOLLOW_UP_VISIT,
 			self::HOSPICE_FOLLOW_UP_VISIT_TELEHEALTH,
 			self::CHANGE_OF_CONDITION,
@@ -123,50 +121,14 @@ class Type_visit_entity extends \Mobiledrs\entities\Entity {
 
 	public function filterRecords($trans_id, $tovs) : array
 	{
-		$initialList = [];
-		$followUpList = [];
-		$cancelNoShowList = [];
-		$selectedTov = [];
+		$filteredTovs = [];
 
-// 		echo '<pre>';
-// echo var_dump($tovs);
-// echo '</pre>';
-// exit;
-		
-foreach ($tovs as $tov) {
-	if (empty($selectedTov) && $tov->tov_id === $trans_id) {
-		$selectedTov[] = $tov;
-	}
+		$otherList = [
+			self::NO_SHOW,
+			self::CANCELLED
+		];
 
-	if (in_array($tov->tov_id, $this->get_initial_list())) {
-		$initialList[] = $tov;	
-		continue;
-	}
-	
-	if (in_array($tov->tov_id, $this->get_followup_list())) {
-		$followUpList[] = $tov;	
-		continue;
-	}
-
-	if (in_array((int)$tov->tov_id, $this->get_other_list())) {
-		$cancelNoShowList[] = $tov;
-		continue;
-	}
-}
-
-$filteredTovs = [];
-if (in_array($trans_id, $this->get_initial_list())) {
-	$filteredTovs = array_merge($filteredTovs, $followUpList);	
-} else {
-	$filteredTovs = array_merge($filteredTovs, $initialList);
-}
-
-$filteredTovs = array_merge($filteredTovs, $cancelNoShowList, $selectedTov);
-
-		return $filteredTovs;
-		// $filteredTovs = array_merge($initialList, $followUpList, $cancelNoShowList);
-
-		/* foreach ($tovs as $tov) {
+		foreach ($tovs as $tov) {
 			$tovInitialType = in_array($trans_id, $this->get_initial_list()) && 
 				in_array($tov->tov_id, $this->get_initial_list());
 
@@ -192,8 +154,8 @@ $filteredTovs = array_merge($filteredTovs, $cancelNoShowList, $selectedTov);
 				$filteredTovs[] = $tov;
 				continue;
 			}
-		} 
+		}
 
-		return $filteredTovs;*/
+		return $filteredTovs;
 	}
 }
