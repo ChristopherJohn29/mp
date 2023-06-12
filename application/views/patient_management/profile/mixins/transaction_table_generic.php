@@ -34,6 +34,7 @@
         <thead>
             <tr>
                 <th style="width: 20%;">Reason for Visit</th>
+                <th style="width: 20%;">Agreed to Cognitive Visit</th>
                 <th>ACP</th>
                 <th>DM</th>
                 <th>HTN</th>
@@ -47,6 +48,7 @@
         <tbody>
             <tr>
             <td>{{ transaction.pt_reasonForVisit }}</td>
+            <td>{{ transaction.get_selected_choice_format(transaction.pt_acv) }}</td>
                 <td>{{ transaction.get_selected_choice_format(transaction.pt_acp) }}</td>
                 <td>{{ transaction.get_selected_choice_format(transaction.pt_diabetes) }}</td>
                 <td>{{ transaction.get_selected_choice_format(transaction.pt_hypertension) }}</td>

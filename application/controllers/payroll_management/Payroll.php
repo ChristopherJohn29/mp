@@ -315,23 +315,20 @@ class Payroll extends \Mobiledrs\core\MY_Controller {
 		$this->check_permission('generate_pr');
 
 		$page_data = [];
-
-		$page_data = [];
 		
 		$pageAddtional = array(
 			array(
-				'tov_id' => '1',
+				'tov_id' => '21',
 				'tov_name' => 'Total Advance Care Plan (ACP)'
 			),
 			array(
-				'tov_id' => '2',
+				'tov_id' => '22',
 				'tov_name' => 'Total Annual Wellness (AW)'
 			),
 		);
 
 		$visit = $this->payroll_model->fetch_tov();
 		$page_data['tov'] =  array_merge($pageAddtional, $visit);
-
 
 		if ( ! empty($this->input->post()))
 		{
@@ -437,6 +434,7 @@ class Payroll extends \Mobiledrs\core\MY_Controller {
 				$payroll_summaries
 			);
 		}
+		
 
 		$payroll_entity = new Payroll_entity([], $results);
 
