@@ -55,6 +55,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 				],
 				[
 					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 18
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 19
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
 					'condition' => '=',
 	        		'value' => $pt_tovID
 				]
@@ -116,7 +126,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 	{
 
 	
-		if($pt_tovID != 1 && $pt_tovID != 2){
+		if($pt_tovID != 21 && $pt_tovID != 22){
 			$transaction_params = [
 				'order' => [
 					'key' => 'patient_transactions.pt_dateOfService',
@@ -173,7 +183,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 	
 
 		
-		if($pt_tovID == 1){
+		if($pt_tovID == 21){
 			$transaction_params = [
 				'order' => [
 					'key' => 'patient_transactions.pt_dateOfService',
@@ -228,7 +238,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 			];
 		}
 
-		if($pt_tovID == 2){
+		if($pt_tovID == 22){
 			$transaction_params = [
 				'order' => [
 					'key' => 'patient_transactions.pt_dateOfService',
@@ -318,20 +328,34 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 				$provider_transactions
 			);
 
-			$provider_payment_summary = $payroll_entity->compute_payment_summary();
+			$provider_payment_summary = $payroll_entity->compute_payment_summary_records();
 			$transaction_entity = new \Mobiledrs\entities\patient_management\Transaction_entity;
 			
-			foreach ($payroll_summaries as $payroll_summary) 
-			{
-				if ($payroll_summary->provider_id === $provider_list->provider_id) {
-					$provider_payment_summary['total_salary'] += ((float) $payroll_summary->mileage) * 
-						$provider_payment_summary['mileage']['amount'];
-				}
-			}
+			// foreach ($payroll_summaries as $payroll_summary) 
+			// {
+			// 	if ($payroll_summary->provider_id === $provider_list->provider_id) {
+			// 		$provider_payment_summary['total_salary'] += ((float) $payroll_summary->mileage) * 
+			// 			$provider_payment_summary['mileage']['amount'];
+			// 	}
+			// }
 
-			if ($pt_tovID == 1){
+			$computed = [
+				1 => 'initial_visit_home',
+				2 => 'initial_visit_facility',
+				7 => 'initial_visit_telehealth',
+				3 => 'follow_up_home',
+				4 => 'follow_up_facility',
+				8 => 'follow_up_telehealth',
+				9 => 'ca_homehealth',
+				10 => 'ca_telehealth',
+				5 => 'no_show',
+				22 => 'aw_ippe',
+				21 => 'acp',
+			];
+
+			if ($pt_tovID == 21){
 				$tovname = 'Advance Care Plan (ACP)';
-			} else if($pt_tovID == 2){
+			} else if($pt_tovID == 22){
 				$tovname = 'Annual Wellness (AW)';
 			} else {
 				$tovname = $provider_transactions[0]->tov_name;
@@ -341,7 +365,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 				'provider_id' => $provider_list->provider_id,
 				'provider_name' => $provider_list->get_provider_fullname(),
 				'total_visits' => $provider_payment_summary['total_visits'],
-				'total_salary' => $provider_payment_summary['total_salary'],
+				'total_salary' => $pt_tovID == 6 ? 0 : $provider_payment_summary[$computed[$pt_tovID]]['total'],
 				'dateBilled' => $transaction_entity->getLatestServiceBilledDate($provider_transactions),
 				'tov_name' => $tovname,
 				'pt_tovID' => $pt_tovID,
@@ -401,6 +425,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 					'condition' => '<=',
 	        		'value' => $toDate
 				],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 18
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 19
+        		],
 				[
 					'key' => 'patient_transactions.pt_archive',
 					'condition' => '=',
@@ -503,6 +537,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 					'condition' => '<=',
 	        		'value' => $toDate
 				],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 18
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 19
+        		],
 				[
 					'key' => 'patient_transactions.pt_archive',
 					'condition' => '=',
@@ -608,6 +652,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 				[
 					'key' => 'patient_transactions.pt_tovID',
 					'condition' => '<>',
+	        		'value' => 18
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 19
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
 	        		'value' => \Mobiledrs\entities\patient_management\Type_visit_entity::CANCELLED
 				],
 				[
@@ -631,7 +685,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 	{
 
 
-		if($pt_tovID != 1 && $pt_tovID != 2){
+		if($pt_tovID != 21 && $pt_tovID != 22){
 			$transaction_params = [
 				'order' => [
 					'key' => 'patient_transactions.pt_dateOfService',
@@ -675,6 +729,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 						'key' => 'patient_transactions.pt_archive',
 						'condition' => '=',
 						'value' => NULL
+					],
+					[
+						'key' => 'patient_transactions.pt_tovID',
+						'condition' => '<>',
+						'value' => 18
+					],
+					[
+						'key' => 'patient_transactions.pt_tovID',
+						'condition' => '<>',
+						'value' => 19
 					],
 					[
 						'key' => 'patient_transactions.pt_dateOfService',
@@ -691,7 +755,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 			];
 		}
 
-		if($pt_tovID == 1){
+		if($pt_tovID == 21){
 			$transaction_params = [
 				'order' => [
 					'key' => 'patient_transactions.pt_dateOfService',
@@ -735,6 +799,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 						'key' => 'patient_transactions.pt_archive',
 						'condition' => '=',
 						'value' => NULL
+					],
+					[
+						'key' => 'patient_transactions.pt_tovID',
+						'condition' => '<>',
+						'value' => 18
+					],
+					[
+						'key' => 'patient_transactions.pt_tovID',
+						'condition' => '<>',
+						'value' => 19
 					],
 					[
 						'key' => 'patient_transactions.pt_dateOfService',
@@ -751,7 +825,7 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 			];
 		}
 
-		if($pt_tovID == 2){
+		if($pt_tovID == 22){
 			$transaction_params = [
 				'order' => [
 					'key' => 'patient_transactions.pt_dateOfService',
@@ -795,6 +869,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 						'key' => 'patient_transactions.pt_archive',
 						'condition' => '=',
 						'value' => NULL
+					],
+					[
+						'key' => 'patient_transactions.pt_tovID',
+						'condition' => '<>',
+						'value' => 18
+					],
+					[
+						'key' => 'patient_transactions.pt_tovID',
+						'condition' => '<>',
+						'value' => 19
 					],
 					[
 						'key' => 'patient_transactions.pt_dateOfService',
@@ -868,6 +952,16 @@ class Payroll_model extends \Mobiledrs\core\MY_Models {
 					'condition' => '=',
 	        		'value' => NULL
 				],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 18
+        		],
+				[
+					'key' => 'patient_transactions.pt_tovID',
+					'condition' => '<>',
+	        		'value' => 19
+        		],
 				[
 					'key' => 'patient_transactions.pt_dateOfService',
 					'condition' => '<=',
