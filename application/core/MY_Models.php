@@ -149,6 +149,11 @@ class MY_Models extends \CI_Model {
 
 	public function get_records_by_join(array $params)
 	{	
+		if (isset($params['select'])) 
+		{
+			$this->db->select($params['select']);
+		}
+
 		if (isset($params['joins'])) 
 		{
 			foreach ($params['joins'] as $key => $value) 
@@ -163,6 +168,19 @@ class MY_Models extends \CI_Model {
 			}
 		}
 
+		if (isset($params['where_in_list'])) 
+		{
+	
+			$this->db->group_start();
+			$ids_chunk = array_chunk($params['where_in_list']['values'],25);
+			foreach($ids_chunk as $ids)
+			{
+				$this->db->or_where_in($params['where_in_list']['key'], $ids);
+			}
+
+			$this->db->group_end();
+		}
+
 		if (isset($params['where']))
 		{
 			foreach ($params['where'] as $value) {
@@ -174,22 +192,51 @@ class MY_Models extends \CI_Model {
 			}
 		}
 
-		if (isset($params['where_in_list'])) 
+		if (isset($params['whereCustom']))
 		{
-			$this->db->where_in(
-				$params['where_in_list']['key'], 
-				$params['where_in_list']['values']
-			);
+			$this->db->where($params['whereCustom']);
 		}
+
+
+		if (isset($params['whereOr']))
+		{
+			foreach ($params['whereOr'] as $i => $value) {
+				if ($i > 0) {
+					$this->db->or_where(
+						$value['key'] . ' ' .
+						$value['condition'],
+						$value['value']
+					);	
+				} else {
+					$this->db->where(
+						$value['key'] . ' ' .
+						$value['condition'],
+						$value['value']
+					);
+				}
+			}
+		}
+
+		
+
+		if (isset($params['groupby'])) 
+		{
+			$this->db->group_by($params['groupby']);
+		}
+		
 
 		if (isset($params['order'])) 
 		{
 			$this->db->order_by($params['order']['key'], $params['order']['by']);
 		}
 
-		if (isset($params['limit']))
+		if (isset($params['offset']))
 		{
-			$this->db->limit($params['limit']);
+			$this->db->limit($params['limit'], $params['offset']);
+		} else {
+			if (isset($params['limit'])) {
+				$this->db->limit($params['limit']);
+			}
 		}
 
 		$query = $this->db->get($this->table_name);
