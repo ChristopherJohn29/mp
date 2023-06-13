@@ -143,6 +143,11 @@ class Transaction_entity extends \Mobiledrs\entities\Entity {
 	protected $hhc_address;
 	protected $hhc_dateCreated;
 
+	public function get_reason() : string
+    {
+		return str_replace('(Meds / Labs)', '', $this->pt_reasonForVisit);
+    }
+
     public function get_selected_choice_format(string $choice) : string
     {
 		return ($choice == '1') ? 'Yes' : (($choice == '2') ? 'No' : '');

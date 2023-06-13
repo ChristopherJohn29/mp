@@ -114,7 +114,10 @@ class Profile_entity extends \Mobiledrs\entities\Entity {
 	protected $early_discharge_date;
 	protected $is_early_discharge_checked_by;
 	
-
+	public function get_reason() : string
+    {
+		return str_replace('(Meds / Labs)', '', $this->pt_reasonForVisit);
+    }
 
 	public function get_selected_gender(string $gender) : string
 	{

@@ -70,7 +70,7 @@
                                                     </p>
                                                 </td>
     	                                        <td><p>{{ list.hhc_name }}<span>{{ list.hhc_contact_name }}<br>{{ list.hhc_phoneNumber }}</span></p></td>
-    											<td><p>Reason for Visit : {{ list.pt_reasonForVisit }}</p>
+    											<td><p>Reason for Visit : {{ list.get_reason() }}</p>
                           <p>Type of Visit : {{ list.tov_name }}
                           {{ list.msp == 'yes' ? '<br>With MSP <br>' : ''}}
                             <span>Other Notes: <br>{{ list.prsl_notes|nl2br }}</span>

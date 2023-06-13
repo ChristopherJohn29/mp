@@ -36,7 +36,7 @@
     				<?php echo $list->hhc_phoneNumber; ?>
 	            </td>
 				<td width="270px" style="border-bottom: 1px solid #d2d6de;">
-					Reason for Visit : <?php echo $list->pt_reasonForVisit; ?><br>
+					Reason for Visit : <?php echo str_replace('(Meds / Labs)', '', $list->pt_reasonForVisit); ?><br>
 					Type of Visit : <?php echo $list->tov_name; ?><br>
 					Other Notes: <br>
 					<?php echo nl2br($list->prsl_notes); ?>

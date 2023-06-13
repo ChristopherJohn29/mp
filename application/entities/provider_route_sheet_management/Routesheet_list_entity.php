@@ -91,6 +91,11 @@ class Routesheet_list_entity extends \Mobiledrs\entities\Entity {
 	protected $supervisingMD_firstname;
 	protected $supervisingMD_lastname;
 
+	public function get_reason() : string
+    {
+		return str_replace('(Meds / Labs)', '', $this->pt_reasonForVisit);
+    }
+
 	public function get_selected_tov(string $tov_id) : string
 	{
 		return ($tov_id == $this->tov_id) ? 'selected=true' : '';

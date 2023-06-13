@@ -47,7 +47,7 @@
 
         <tbody>
             <tr>
-            <td>{{ transaction.pt_reasonForVisit }}</td>
+            <td>{{ transaction.get_reason() }}</td>
             <td>{{ transaction.get_selected_choice_format(transaction.pt_acv) }}</td>
                 <td>{{ transaction.get_selected_choice_format(transaction.pt_acp) }}</td>
                 <td>{{ transaction.get_selected_choice_format(transaction.pt_diabetes) }}</td>

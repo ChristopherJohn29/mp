@@ -69,7 +69,7 @@
                                                     </p>
                                                 </td>
     	                                        <td><p>{{ list.hhc_name }}<span>{{ list.hhc_contact_name }}<br>{{ list.hhc_phoneNumber }}</span></p></td>
-    											<td><p>Reason for Visit : {{ list.pt_reasonForVisit }}</p><p>Type of Visit : {{ list.tov_name }}
+    											<td><p>Reason for Visit : {{ list.get_reason() }}</p><p>Type of Visit : {{ list.tov_name }}
                           {{ list.pt_aw_ippe_code == 'G0402' ? '<br>With IPPE <br>' : ''}}
                             {{ list.pt_aw_ippe_code == 'G0438' ? '<br>With AW <br>' : ''}}
                             {{ list.pt_aw_ippe_code == 'G0439' ? '<br>With AW <br>' : ''}}
